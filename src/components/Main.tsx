@@ -10,9 +10,7 @@ const Main = () => {
    
    useEffect(() => {
       import('Sharedlib/theme').then((sharedTheme) => {
-         setTheme(sharedTheme.default);
-         console.log('here theme',sharedTheme.default);
-         
+         setTheme(sharedTheme.default);    
       }).catch((error) => {
          console.log('Error loading shared theme', error);
       })

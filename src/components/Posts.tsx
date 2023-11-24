@@ -22,7 +22,6 @@ const Posts = () => {
          }).catch(error => {
             console.error('Error occured in event', error);
          })
-      console.log('called here ', WindowEventService);
       return () => {
          WindowEventService.unsubscribe(eventName, updateCurrentUserInfo)
       }
