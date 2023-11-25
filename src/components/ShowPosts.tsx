@@ -26,7 +26,9 @@ export const ShowPosts = ({
       setAllPost(data);
    };
    
-   const currentUserId = userInfo.userid
+   const currentUserId = userInfo._id;
+   console.log('here', userInfo);
+   
 
    return (
       <>

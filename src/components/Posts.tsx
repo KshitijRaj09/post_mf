@@ -3,15 +3,11 @@ import {CreatePost} from "./CreatePost";
 import { ShowPosts } from "./ShowPosts";
 import { WindowEvents, default as WindowEventService } from "Sharedlib/eventservice";
 import Loader from "./Loaders";
+import { UserInfoType } from "@kshitijraj09/sharedlib_mf";
 
 const Posts = () => {
    const [updatePostsSection, setUpdatePostsSection] = useState<Number>(0);
-   const [userInfo, setUserInfo] = useState({
-      username: '',
-      name: '',
-      avatar: '',
-      userid: ''
-   });
+   const [userInfo, setUserInfo] = useState<UserInfoType>();
    const [loading, setLoading] = useState(true);
 
       const eventName = 'currentUser' as typeof WindowEvents.currentUser;

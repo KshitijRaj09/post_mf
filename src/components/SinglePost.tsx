@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+   Alert,
    Avatar,
+   Button,
    Card,
    CardActions,
    CardContent,
@@ -16,6 +18,7 @@ import {dateFormatter} from "../util";
 import {deletePostAPI} from "../apis/deletePostAPI";
 import styled from "@emotion/styled";
 import {Link} from "react-router-dom";
+import { likePostAPI } from "../apis/likePostAPI";
 
 type SinglePostPropsType = {
    currentUserId: string;
@@ -56,13 +59,36 @@ export const SinglePost = ({
    setUpdatePostsSection,
    currentUserId
 }: SinglePostPropsType) => {
+   const [likePost, setLikePost] = useState(false);
    const classes = styles();
+   const [likesCount, setLikesCount] = useState<number>();
    const deletePost = async () => {
       const data = await deletePostAPI(postId);
       if (data) {
          setUpdatePostsSection((count: number) => count + 1);
       }
    };
+
+   useEffect(() => {
+      setLikePost(likes.some(userid => userid === currentUserId));
+      setLikesCount(likes.length);
+   }, []);
+
+   const setLikeHandler = async() => {
+         try {
+            await likePostAPI(postId);
+            likePost ? setLikesCount(count => count - 1) : setLikesCount(count => count + 1);
+            setLikePost((prevState) => !prevState);
+            <Alert severity="success">
+               Liked the post
+            </Alert>
+         }
+         catch (error) {
+            <Alert severity="error">
+               Something went wrong
+            </Alert>
+         }
+   }
 
    return (
       <StyledCard>
@@ -88,7 +114,12 @@ export const SinglePost = ({
             <Typography variant='body1'>{postContent}</Typography>
          </CardContent>
          <CardActions disableSpacing sx={classes.CardActions}>
-            <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite style={{color:'red'}} />}
+               checked={likePost} onClick={setLikeHandler}
+            />
+            {!!likesCount &&
+               <Typography color='brown'>{likesCount} {likesCount > 1 ? 'likes' : 'like'}</Typography>
+            }
          </CardActions>
       </StyledCard>
    );
