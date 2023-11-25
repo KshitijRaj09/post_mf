@@ -26,7 +26,7 @@
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.10.0",
     "styled-components": "^5.3.9",
-    "@kshitijraj09/sharedlib_mf": "1.0.4"
+    "@kshitijraj09/sharedlib_mf": "1.0.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
