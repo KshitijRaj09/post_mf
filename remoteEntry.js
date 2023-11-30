@@ -230,7 +230,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 	/* webpack/runtime/remotes loading */
 /******/ 	(() => {
 /******/ 		var chunkMapping = {
-/******/ 			"src_components_Posts_tsx": [
+/******/ 			"webpack_container_remote_Sharedlib_eventservice": [
 /******/ 				"webpack/container/remote/Sharedlib/eventservice"
 /******/ 			]
 /******/ 		};
@@ -584,7 +584,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
 /******/ 					} else {
-/******/ 						if(!/^webpack_sharing_consume_default_(emotion_(react_emotion_react|styled_emotion_styled)|react(\-dom_react\-dom|_react))$/.test(chunkId)) {
+/******/ 						if(!/^webpack_(sharing_consume_default_(emotion_(react_emotion_react|styled_emotion_styled)|react(\-dom_react\-dom|_react))|container_remote_Sharedlib_eventservice)$/.test(chunkId)) {
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
 /******/ 							promises.push(installedChunkData[2] = promise);

@@ -1,9 +1,10 @@
 import React from "react";
+import type { PostsType } from "../typedeclaration/types";
 import { UserInfoType } from "@kshitijraj09/sharedlib_mf";
 type showPostsPropsType = {
-    updatePostsSection: Number;
-    setUpdatePostsSection: React.Dispatch<React.SetStateAction<Number>>;
     userInfo: UserInfoType;
+    allPost: PostsType[];
+    setAllPost: React.Dispatch<React.SetStateAction<PostsType[]>>;
 };
-export declare const ShowPosts: ({ updatePostsSection, setUpdatePostsSection, userInfo }: showPostsPropsType) => React.JSX.Element;
+export declare const ShowPosts: ({ userInfo, allPost, setAllPost }: showPostsPropsType) => React.JSX.Element;
 export {};
