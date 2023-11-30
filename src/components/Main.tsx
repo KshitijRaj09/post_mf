@@ -7,7 +7,6 @@ import Loader from "./Loaders";
 const Main = () => {
    const [theme, setTheme] = useState(null);
    
-   
    useEffect(() => {
       import('Sharedlib/theme').then((sharedTheme) => {
          setTheme(sharedTheme.default);    

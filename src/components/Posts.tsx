@@ -10,7 +10,7 @@ const Posts = () => {
    const [userInfo, setUserInfo] = useState<UserInfoType>();
    const [loading, setLoading] = useState(true);
 
-      const eventName = 'currentUser' as typeof WindowEvents.currentUser;
+   const eventName = 'currentUser' as typeof WindowEvents.currentUser;
    useEffect(() => {
       import("Sharedlib/eventservice").
          then((event) => {
@@ -25,7 +25,6 @@ const Posts = () => {
 
    const updateCurrentUserInfo = (event: Event) => {
       const { detail }  = event as CustomEvent;
-      console.log(detail,'detail');
       setUserInfo(detail);
       setLoading(false);
    }
