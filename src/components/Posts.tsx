@@ -46,8 +46,8 @@ const Posts = () => {
 
       showPosts();
       return () => {
-         socket.off('newpost-from-server');
-         socket.off('deletepost-from-server');
+         socket?.off('newpost-from-server');
+         socket?.off('deletepost-from-server');
       }
    }, []);
 
