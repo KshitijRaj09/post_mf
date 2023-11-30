@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from "react";
-import {showAllPostsAPI} from "../apis/showAllPostsAPI";
+import React from "react";
 import type {PostsType} from "../typedeclaration/types";
 import { SinglePost } from "./SinglePost";
 import { UserInfoType } from "@kshitijraj09/sharedlib_mf";
 
 type showPostsPropsType = {
-   updatePostsSection: Number;
-   setUpdatePostsSection: React.Dispatch<React.SetStateAction<Number>>;
    userInfo: UserInfoType;
+   allPost: PostsType[];
+   setAllPost: React.Dispatch<React.SetStateAction<PostsType[]>>;
 };
 
 export const ShowPosts = ({
-   updatePostsSection,
-   setUpdatePostsSection,
-   userInfo
+   userInfo,
+   allPost,
+   setAllPost
 }: showPostsPropsType) => {
-   const [allPost, setAllPost] = useState<PostsType[]>([]);
-
-   useEffect(() => {
-      showPosts();
-   }, [updatePostsSection]);
-
-   const showPosts = async () => {
-      const data = await showAllPostsAPI();
-      setAllPost(data);
-   };
-   
    const currentUserId = userInfo._id;  
 
    return (
@@ -41,7 +29,7 @@ export const ShowPosts = ({
                   updatedAt={post.updatedAt}
                   userId={post.userId}
                   likes={post.likes}
-                  setUpdatePostsSection={setUpdatePostsSection}
+                  setAllPost={setAllPost}
                   currentUserId={currentUserId}
                />
             ))

@@ -16,6 +16,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
+    "@kshitijraj09/sharedlib_mf": "1.0.9",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.127",
     "@mui/material": "^5.12.0",
@@ -25,8 +26,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.10.0",
-    "styled-components": "^5.3.9",
-    "@kshitijraj09/sharedlib_mf": "1.0.9"
+    "socket.io-client": "^4.7.2",
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

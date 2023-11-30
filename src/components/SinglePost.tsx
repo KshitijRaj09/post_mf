@@ -21,7 +21,7 @@ import { likePostAPI } from "../apis/likePostAPI";
 
 type SinglePostPropsType = {
    currentUserId: string;
-   setUpdatePostsSection: React.Dispatch<React.SetStateAction<Number>>;
+   setAllPost: React.Dispatch<React.SetStateAction<PostsType[]>>;
 } & PostsType
 
 const StyledCard = styled(Card)(({theme}) => ({
@@ -55,16 +55,18 @@ export const SinglePost = ({
    createdAt,
    userId,
    postId,
-   setUpdatePostsSection,
+   setAllPost,
    currentUserId
 }: SinglePostPropsType) => {
+   const socket = window.socket;
    const [likePost, setLikePost] = useState(false);
    const classes = styles();
    const [likesCount, setLikesCount] = useState<number>();
    const deletePost = async () => {
       const data = await deletePostAPI(postId);
+      socket.emit('deletepost-from-client', { postId, userId });
       if (data) {
-         setUpdatePostsSection((count: number) => count + 1);
+         setAllPost((prevPost)=>prevPost.filter(post=>post.postId !== postId))
       }
    };
 

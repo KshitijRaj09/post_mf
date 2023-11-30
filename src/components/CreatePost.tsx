@@ -6,16 +6,16 @@ import {
    TextField,
    styled,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 import {createPostAPI} from "../apis/createpostAPI";
-import { getUserInfoFromStorage } from "../util";
-import { WindowEvents, default as WindowEventService, UserInfoType } from "Sharedlib/eventservice";
+import { UserInfoType } from "@kshitijraj09/sharedlib_mf";
+import { PostsType } from "../typedeclaration/types";
 
 type CreatePostPropsType = {
-   setUpdatePostsSection: React.Dispatch<React.SetStateAction<Number>>;
-   userInfo: UserInfoType
+   userInfo: UserInfoType;
+   setAllPost: React.Dispatch<React.SetStateAction<PostsType[]>>;
 }
 
 const styles = () => ({
@@ -43,12 +43,11 @@ const StyledLoadingButton = styled(LoadingButton)(() => ({
    },
 }));
 
-//const userInfo = JSON.parse(getUserInfoFromStorage());
-
 export const CreatePost =({
-   setUpdatePostsSection,
-   userInfo
+   userInfo,
+   setAllPost
 }: CreatePostPropsType) => {
+   const socket = window.socket;
    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
    const [isInProgress, setIsInProgress] = useState(false);
    const [formValue, setFormValue] = useState({
@@ -64,10 +63,17 @@ export const CreatePost =({
       setIsInProgress(true);
       formdata.postContent.trim();
       const data = await createPostAPI(formdata);
+      socket.emit('newpost-from-client', data);
+      const newPost = {
+         ...data,
+         avatar: userInfo.avatar,
+         username: userInfo.username,
+         name: userInfo.name
+      };
+      setAllPost((prevposts) => [newPost, ...prevposts]);
       if (data) {
          setFormValue({ postContent: '' })
          setIsSubmitDisabled(true);
-         setUpdatePostsSection((count: number) => count + 1);
       }
       setIsInProgress(false);
    };
