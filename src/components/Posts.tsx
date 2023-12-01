@@ -49,7 +49,7 @@ const Posts = () => {
          socket?.off('newpost-from-server');
          socket?.off('deletepost-from-server');
       }
-   }, []);
+   }, [socket]);
 
    const showPosts = async () => {
       const data = await showAllPostsAPI();
